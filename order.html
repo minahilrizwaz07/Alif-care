@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Order | ALIF Skin Care</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4fbfb; margin:0; padding:0; }
+        header { background:#008080; padding:18px; color:white; text-align:center; font-size:26px; font-weight:bold; }
+        .container { width:90%; max-width:600px; margin:40px auto; background:white; padding:26px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,.12); }
+        h2 { color:#008080; text-align:center; margin-bottom:20px; }
+        label { display:block; margin:12px 0 4px; font-size:14px; font-weight:bold; }
+        input, textarea, select { width:100%; padding:10px; font-size:14px; border-radius:8px; border:1px solid #cccccc; }
+        textarea { height:80px; resize:none; }
+        .price-box { display:flex; justify-content:space-between; align-items:center; gap:12px; background:#e9f7f7; padding:10px; border-radius:8px; margin:8px 0 16px; border:1px solid #cfeff0; }
+        .price-box .label { color:#006060; font-weight:700; }
+        .total { font-size:18px; font-weight:800; color:#004d4d; }
+        button { width:100%; padding:12px; background:#008080; color:white; font-size:18px; border:none; border-radius:8px; margin-top:16px; cursor:pointer; font-weight:bold; }
+        button:hover { background:#005f5f; }
+        footer { text-align:center; padding:12px; background:#008080; color:white; margin-top:40px; }
+        .note { font-size:13px; color:#666; margin-top:8px; }
+    </style>
+</head>
+<body>
+
+<header>ALIF Skin Care – Order Form</header>
+
+<div class="container">
+    <h2>Confirm Your Order</h2>
+
+    <form id="orderForm">
+        <label>Product Selected</label>
+        <input type="text" id="productName" name="productName" readonly>
+
+        <label>Unit Price (Rs.)</label>
+        <input type="text" id="unitPrice" name="unitPrice" readonly>
+
+        <label>Quantity</label>
+        <select id="qty" name="qty" required>
+            <!-- allow quantity 1..10 -->
+            <script>for(let i=1;i<=10;i++){document.write(`<option value="${i}">${i}</option>`);}</script>
+        </select>
+
+        <div class="price-box">
+            <div class="label">Total (Rs.)</div>
+            <div class="total" id="totalAmount">—</div>
+        </div>
+
+        <label>Your Full Name</label>
+        <input type="text" name="name" required placeholder="Enter your name">
+
+        <label>Phone Number</label>
+        <input type="text" name="phone" required placeholder="03xx-xxxxxxx">
+
+        <label>Delivery Address</label>
+        <textarea name="address" required placeholder="House number, street, city"></textarea>
+
+        <div class="note">Note: You will be redirected to WhatsApp to confirm the order. Change the WhatsApp number in the script to your own.</div>
+
+        <button type="submit">Confirm Order</button>
+    </form>
+</div>
+
+<footer>© 2025 ALIF Skin Care. All Rights Reserved.</footer>
+
+<script>
+(function(){
+    // Read product and price from URL
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get('product') || '';
+    const priceParam = params.get('price') || '';
+
+    // helper: parse integer safely
+    function parseIntSafe(v){
+        const n = parseInt(String(v).replace(/[^0-9\-]/g,''),10);
+        return isNaN(n) ? 0 : n;
+    }
+
+    const unitPrice = parseIntSafe(priceParam);
+
+    // fill fields
+    document.getElementById('productName').value = product;
+    document.getElementById('unitPrice').value = unitPrice ? `Rs. ${unitPrice}` : 'N/A';
+
+    // total calculation
+    const qtySelect = document.getElementById('qty');
+    const totalEl = document.getElementById('totalAmount');
+
+    function updateTotal(){
+        const qty = parseIntSafe(qtySelect.value);
+        const total = unitPrice * qty; // digit-by-digit JS multiplication
+        // format with commas
+        const formatted = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        totalEl.textContent = `Rs. ${formatted}`;
+    }
+
+    // init
+    updateTotal();
+    qtySelect.addEventListener('change', updateTotal);
+
+    // Submit -> open whatsapp with full order details
+    document.getElementById('orderForm').addEventListener('submit', function(e){
+        e.preventDefault();
+
+        const name = this.name.value.trim();
+        const phone = this.phone.value.trim();
+        const address = this.address.value.trim();
+        const qty = parseIntSafe(this.qty.value);
+        const total = unitPrice * qty;
+        const totalFormatted = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        if(!product){
+            alert('Product not detected. Please open this page from the product Buy Now button.');
+            return;
+        }
+
+        // Build message (URL encoded)
+        let message =
+            `New Order From ALIF Website:%0A` +
+            `------------------------------%0A` +
+            `Product: ${product}%0A` +
+            `Unit Price: Rs. ${unitPrice}%0A` +
+            `Quantity: ${qty}%0A` +
+            `Total: Rs. ${totalFormatted}%0A%0A` +
+            `Customer Name: ${encodeURIComponent(name)}%0A` +
+            `Phone: ${encodeURIComponent(phone)}%0A` +
+            `Address: ${encodeURIComponent(address)}%0A`;
+
+        // CHANGE this to your WhatsApp number (international, no + / no 00). Example for Pakistan: 923001234567
+        const WA_NUMBER = '923001234567';
+
+        // Redirect to WhatsApp
+        window.location.href = `https://wa.me/${WA_NUMBER}?text=${message}`;
+    });
+})();
+</script>
+
+</body>
+</html>

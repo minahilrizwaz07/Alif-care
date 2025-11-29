@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="ALIF Skin Care Products - Serums, Toners, Moisturizers, and Face Washes.">
+<meta name="keywords" content="serums, toners, moisturizers, face washes, niacinamide, vitamin C, glycolic acid, skincare">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Products | ALIF Skin Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* GENERAL STYLES */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(to bottom, #ffffff 50%, #b2ebf2 50%);
+    margin: 0;
+    color: #004d40;
+}
+h1 {
+    text-align: center;
+    padding: 40px 20px 10px;
+    color: #00796b;
+}
+
+/* NAVIGATION */
+nav {
+    text-align: center;
+    margin-bottom: 40px;
+}
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #00796b;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+nav a:hover {
+    background-color: #004d40;
+    color: #fff;
+}
+
+/* FLOATING PRODUCT MENU */
+.float-menu {
+    position: fixed;
+    top: 180px;
+    left: 0;
+    width: 220px;
+    background: #ffffff;
+    border-right: 1px solid #80cbc4;
+    border-radius: 8px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    z-index: 10;
+}
+.float-menu h3 {
+    text-align: center;
+    color: #004d40;
+    margin-bottom: 15px;
+}
+.float-menu a {
+    display: block;
+    margin: 12px 0;
+    text-decoration: none;
+    color: #004d40;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.float-menu a:hover {
+    background: #00796b;
+    color: white;
+}
+
+/* PRODUCTS GRID */
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 40px 60px;
+    max-width: 1200px;
+    margin-left: 240px; /* space for floating menu */
+}
+
+/* PRODUCT CARD */
+.product {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.product img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #00796b;
+}
+.product h3 {
+    color: #004d40;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.product p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #00695c;
+}
+.product a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #00796b;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.product a:hover {
+    background-color: #004d40;
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .float-menu {
+        display: none;
+    }
+    .products-container {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+/* SMOOTH SCROLL */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+<body>
+
+<h1>Our Skin Care Products</h1>
+
+<nav>
+    <a href="index.html">Home</a> |
+    <a href="products.html">Products</a> |
+    <a href="tips.html">Skin Tips</a> |
+    <a href="contact.html">Contact</a>
+</nav>
+
+<!-- FLOATING LEFT MENU -->
+<div class="float-menu">
+    <h3>Categories</h3>
+    <a href="#serums">Serums</a>
+    <a href="#toners">Toners</a>
+    <a href="#moisturizers">Moisturizers</a>
+    <a href="#facewashes">Face Washes</a>
+</div>
+
+<!-- PRODUCTS GRID -->
+<div class="products-container">
+    <!-- SERUMS -->
+    <div class="product" id="serums">
+        <img src="C:\Users\user\Desktop\project photos\Gemini_Generated_Image_j6d838j6d838j6d8.png" alt="Serums">
+        <h3>Serums</h3>
+        <p>Niacinamide, Vitamin C, Retinol — designed to brighten, repair, and hydrate skin.</p>
+        <a href="serums.html">View Serums</a>
+    </div>
+
+    <!-- TONERS -->
+    <div class="product" id="toners">
+        <img src="C:\Users\user\Desktop\project photos\Gemini_Generated_Image_3729m13729m13729.png" alt="Toners">
+        <h3>Toners</h3>
+        <p>Glycolic and Salicylic acid toners for exfoliation and acne prevention.</p>
+        <a href="toners.html">View Toners</a>
+    </div>
+
+    <!-- MOISTURIZERS -->
+    <div class="product" id="moisturizers">
+        <img src="C:\Users\user\Desktop\project photos\Gemini_Generated_Image_f3b06rf3b06rf3b0.png"alt="Moisturizers">
+        <h3>Moisturizers</h3>
+        <p>Hydrating creams for dry, oily, sensitive, and men’s skin types.</p>
+        <a href="moisturizers.html">View Moisturizers</a>
+    </div>
+
+    <!-- FACE WASHES -->
+    <div class="product" id="facewashes">
+        <img src=C:\Users\user\Downloads\Gemini_Generated_Image_xvnw22xvnw22xvnw.png alt="Face Washes">
+        <h3>Face Washes</h3>
+        <p>Removes dirt & oil without dryness, keeps skin fresh.</p>
+        <a href="facewashes.html">View Face Washes</a>
+    </div>
+</div>
+
+</body>
+</html>
